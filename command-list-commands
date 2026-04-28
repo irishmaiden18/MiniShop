@@ -1,0 +1,33 @@
+start: 
+    npm create vite@latest
+
+    name project
+
+    select React
+
+    select JavaScript
+
+    install with npm and start now? yes
+
+App.jsx:
+    empty app.jsx between the fragments
+    
+    delete all the imports 
+    
+    delete the const above the return
+
+index.css:
+    delete the first two text lines under root:
+
+    delete the media query at the bottom of root:
+
+    delete everything below root rules
+    
+run project:
+    npm run dev
+
+start components:
+    rafce + enter shortcut to creating components
+
+install react router:
+    npm i react-router
