@@ -1,15 +1,21 @@
-const MiniProductCard = () => {
-  return (
-    <>
-        <h2>Mini-Product Card</h2>
-        <div>
-            <img src={image} alt={`${name} pic`}/>
-            <h3>{title}</h3>
-            <p>{price}</p>
-            <button>Add to Cart</button>
-        </div>
-    </>
-  )
+import { useContext } from "react"
+import CartContext from "../context/CartContext"
+
+
+const MiniProductCard = ({image, title, price, id, quantity}) => {
+
+    const {addToCart} = useContext(CartContext)
+
+    return (
+        <>
+            <div>
+                <img src={image} alt={`${title} pic`} width={250} />
+                <h2>{title}</h2>
+                <p>${price}.00</p>
+                {quantity ? <p>Quantity: {quantity}</p> : <button onClick={() => addToCart(id)}>Add to Cart</button>}
+            </div>
+        </>
+    )
 }
 
 export default MiniProductCard
