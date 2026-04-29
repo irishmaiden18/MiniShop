@@ -13,7 +13,7 @@ const Home = () => {
                 {productList ? (
                     productList.map((product) => (
                         <li key={product.id}>
-                            <MiniProductCard image={product.images[0]} title={product.title} price={product.price} id={product.id}/>
+                            <MiniProductCard product={product}/>
                         </li>
                     ))
                 ) : (

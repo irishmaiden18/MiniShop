@@ -1,3 +1,4 @@
+/*Nav Styles*/
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -10,4 +11,37 @@
   margin-left: 1rem;
   text-decoration: none;
   color: inherit;
+}
+
+/*Modal Styles*/
+.modal-overlay {
+  position: relative;
+  top: -200px; left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  position: relative;
+  min-width: 300px;
+  max-width: 80%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
 }

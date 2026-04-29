@@ -23,7 +23,7 @@ function App() {
           const updatedProductList = resData.map ((product) => {
             
             const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-            const numReviews = Math.floor(Math.random() * 11)
+            const numReviews = Math.floor(Math.random() * 6)
             let customerReviews = []
             for (let i = 0; i < numReviews; i++) {
               const randomText = Math.floor(Math.random() * 203) + 10
@@ -44,8 +44,6 @@ function App() {
       }
       fetchData()
   }, [])
-
-  
 
   const addToCart = (id) => {
 

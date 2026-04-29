@@ -30,7 +30,7 @@ const Cart = () => {
             {cart ? (
                 cart.map((product) => (
                     <li key={product.id}>
-                        <MiniProductCard image={product.images[0]} title={product.title} price={product.price} id={product.id} quantity={product.quantity}/>
+                        <MiniProductCard product={product} quantity={product.quantity}/>
                     </li>
                 ))
             ) : (
