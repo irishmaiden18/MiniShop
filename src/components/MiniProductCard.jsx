@@ -1,10 +1,18 @@
 import { useContext } from "react"
 import CartContext from "../context/CartContext"
+import { Navigate } from "react-router"
 
 
 const MiniProductCard = ({image, title, price, id, quantity}) => {
 
     const {addToCart, increaseCartQuantity, decreaseCartQuantity} = useContext(CartContext)
+
+    const navigate = useNavigate()
+
+    const handleClick = (id) => {
+        addToCart(id)
+        navigate("/cart")
+    }
 
     return (
         <>
@@ -17,7 +25,7 @@ const MiniProductCard = ({image, title, price, id, quantity}) => {
                         Quantity: <button onClick={() => decreaseCartQuantity(id)}>-</button>{quantity}<button onClick={() => increaseCartQuantity(id)}>+</button>
                     </p> 
                     : 
-                    <button onClick={() => addToCart(id)}>Add to Cart</button>}
+                    <button onClick={() => handleClick(id)}>Add to Cart</button>}
             </div>
         </>
     )

@@ -1,7 +1,7 @@
-import { Route, Routes, useNavigate } from 'react-router'
+import { Route, Routes } from 'react-router'
 import './App.css'
 import Navbar from './components/Navbar'
-import CartContext from './context/CartContext'
+import CartContext, { CartProvider, useCart } from './context/CartContext'
 import Home from './components/Home'
 import Cart from './components/Cart'
 import { useEffect, useState } from 'react'
@@ -9,11 +9,9 @@ import ProductListContext from './context/ProductListContext'
 
 function App() {
   
-  const [cart, setCart] = useState([])
+  const {cart, increaseCartQuantity, decreaseCartQuantity} = useCart()
 
   const [productList, setProductList] = useState(null)
-
-  const navigate = useNavigate()
 
   useEffect (() => {
       const fetchData = async () => {
@@ -36,7 +34,7 @@ function App() {
               customerRating: (Math.random() * 5).toFixed(1),
               customerReviews: customerReviews
             }
-            
+
             return updatedProduct
           })
 
@@ -45,92 +43,42 @@ function App() {
       fetchData()
   }, [])
 
-  
-
   const addToCart = (id) => {
 
-    const product = productList.find((product) => product.id === id)
-    
-    const productInCart = cart.find((product) => product.id === id)
+        const product = productList.find((product) => product.id === id)
+        
+        const productInCart = cart.find((product) => product.id === id)
 
-    if (!productInCart) {
-      const newCartProduct = {
-        ...product,
-        quantity: 1
-      }
-      setCart([...cart, newCartProduct])
-    } else {
-
-      const updatedCart = cart.map ((product) => {
-
-        if (product.id === id) {
-          const updatedProduct = {
-            ...productInCart,
-            quantity: Number(productInCart.quantity) + 1
-          }
-          return updatedProduct
+        if (!productInCart) {
+            const newCartProduct = {
+                ...product,
+                quantity: 1
+            }
+            setCart([...cart, newCartProduct])
         } else {
-          return product
+
+            const updatedCart = cart.map ((product) => {
+
+                if (product.id === id) {
+                const updatedProduct = {
+                    ...productInCart,
+                    quantity: Number(productInCart.quantity) + 1
+                }
+                    return updatedProduct
+                } else {
+                    return product
+                }
+            })
+            setCart(updatedCart)
         }
-      })
-      setCart(updatedCart)
     }
-    navigate("/cart")
-  }
-
-  const increaseCartQuantity = (id) => {
-
-    const productInCart = cart.find((product) => product.id === id)
-
-    const updatedCart = cart.map ((product) => {
-      if (product.id === id) {
-        const updatedProduct = {
-          ...productInCart,
-          quantity: Number(productInCart.quantity) + 1
-        }
-        return updatedProduct
-      } else {
-        return product
-      }
-    })
-    setCart(updatedCart)
-  }
-
-  const decreaseCartQuantity = (id) => {
-
-    const productInCart = cart.find((product) => product.id === id)
-
-    let updatedCart = []
-    if (productInCart.quantity > 1) {
-      updatedCart = cart.map ((product) => {
-        if (product.id === id) {
-          const updatedProduct = {
-            ...productInCart,
-            quantity: Number(productInCart.quantity) - 1
-          }
-          return updatedProduct
-        } else {
-          return product
-        }
-      })
-    } else if (productInCart.quanty = 1) {
-      updatedCart = cart.filter((product) => product.id !== id)
-    }
-    setCart(updatedCart)
-  }
 
   return (
     <ProductListContext value={{
       productList: productList,
       setProductList: setProductList
     }}>
-    <CartContext value={{
-      cart: cart,
-      setCart: setCart,
-      addToCart: addToCart,
-      increaseCartQuantity: increaseCartQuantity,
-      decreaseCartQuantity: decreaseCartQuantity
-    }}>
+    <CartProvider>
       <h1>MiniShop</h1>
 
       <Navbar/>
@@ -139,7 +87,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/cart" element={<Cart/>}/>
       </Routes>
-    </CartContext>
+    </CartProvider>
     </ProductListContext>
   )
 }
