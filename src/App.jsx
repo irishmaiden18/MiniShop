@@ -27,11 +27,30 @@ function App() {
 
     const product = productList.find((product) => product.id === id)
     
-    const cartProduct = {
-      ...product,
-      quantity: 1
+    const productInCart = cart.find((product) => product.id === id)
+
+    if (!productInCart) {
+      const newCartProduct = {
+        ...product,
+        quantity: 1
+      }
+      setCart([...cart, newCartProduct])
+    } else {
+
+      const updatedCart = cart.map ((product) => {
+
+        if (product.id === id) {
+          const updatedProduct = {
+            ...productInCart,
+            quantity: Number(productInCart.quantity) + 1
+          }
+          return updatedProduct
+        } else {
+          return product
+        }
+      })
+      setCart(updatedCart)
     }
-    setCart([...cart, cartProduct])
   }
 
   return (
