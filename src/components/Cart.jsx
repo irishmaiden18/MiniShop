@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import CartContext from "../context/CartContext"
 import MiniProductCard from "./MiniProductCard"
+import { Link } from "react-router"
 
 const Cart = () => {
 
@@ -37,6 +38,7 @@ const Cart = () => {
             )}
         </ul>
         <h3>Total Price: ${total}.00</h3>
+        <Link to="/"><button>Continue Shopping</button></Link>
         <button onClick={checkout}>Checkout</button>
     </>
   )

@@ -4,7 +4,7 @@ import CartContext from "../context/CartContext"
 
 const MiniProductCard = ({image, title, price, id, quantity}) => {
 
-    const {addToCart} = useContext(CartContext)
+    const {addToCart, increaseCartQuantity, decreaseCartQuantity} = useContext(CartContext)
 
     return (
         <>
@@ -12,7 +12,12 @@ const MiniProductCard = ({image, title, price, id, quantity}) => {
                 <img src={image} alt={`${title} pic`} width={250} />
                 <h2>{title}</h2>
                 <p>${price}.00</p>
-                {quantity ? <p>Quantity: {quantity}</p> : <button onClick={() => addToCart(id)}>Add to Cart</button>}
+                {quantity ? 
+                    <p>
+                        Quantity: <button onClick={() => decreaseCartQuantity(id)}>-</button>{quantity}<button onClick={() => increaseCartQuantity(id)}>+</button>
+                    </p> 
+                    : 
+                    <button onClick={() => addToCart(id)}>Add to Cart</button>}
             </div>
         </>
     )
