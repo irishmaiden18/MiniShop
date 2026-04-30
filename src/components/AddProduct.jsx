@@ -3,7 +3,7 @@ import ProductListContext from "../context/ProductListContext"
 
 const AddProduct = () => {
 
-    const {AddProduct} = useContext(ProductListContext)
+    const {addProduct} = useContext(ProductListContext)
 
     const defaultForm = {
         id: "",
@@ -24,26 +24,16 @@ const AddProduct = () => {
 
         const {name, value} = event.target
 
-        // if (name === "imageURL") {
-        //     console.log("imageURL")
-        //     const updatedFormData = {
-        //         ...formData,
-        //         [name]: formData.images.push(value)
-        //     }
-        //     console.log(formData.images)
-        //     setFormData(updatedFormData)
-        // } else {
-            const updatedFormData = {
-                ...formData,
-                [name]: value
-            }
-            setFormData(updatedFormData)
-        // }
+        const updatedFormData = {
+            ...formData,
+            [name]: value
+        }
+        setFormData(updatedFormData)
     }
 
     const handleSubmit = (event) => {
         
-        event.preventDefault
+        event.preventDefault()
 
         const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
         const numReviews = Math.floor(Math.random() * 3)
@@ -64,12 +54,13 @@ const AddProduct = () => {
             },
             customerRating: formData.customerRating || (Math.random() * 5).toFixed(1),
             description: formData.description || string.slice(0, randomTextLength),
-            images: formData.images,
+            images: [formData.images],
             price: formData.price,
             customerReviews: customerReviews
         }
+        console.log(newProduct)
 
-        AddProduct(newProduct)
+        addProduct(newProduct)
 
         setFormData(defaultForm)
     }
@@ -122,7 +113,7 @@ const AddProduct = () => {
                 <label>Image URL: </label>
                 <input 
                     type="text"
-                    name="imageURL"
+                    name="images"
                     onChange={handleChange}
                 />
             </div>

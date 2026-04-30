@@ -27,6 +27,7 @@ const Home = () => {
     }
 
     let filteredProductList = filteredProducts()
+    console.log(filteredProductList)
 
     return (
         <>

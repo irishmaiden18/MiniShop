@@ -126,7 +126,8 @@ function App() {
   return (
     <ProductListContext value={{
       productList: productList,
-      setProductList: setProductList
+      setProductList: setProductList,
+      addProduct: addProduct
     }}>
     <CartContext value={{
       cart: cart,
