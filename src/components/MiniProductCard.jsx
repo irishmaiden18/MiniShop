@@ -8,7 +8,7 @@ const MiniProductCard = ({product, quantity}) => {
     const {addToCart, increaseCartQuantity, decreaseCartQuantity} = useContext(CartContext)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
-
+    // console.log(product)
     return (
         <>
             <div>

@@ -47,6 +47,10 @@ function App() {
       fetchData()
   }, [])
 
+  const addProduct = (product) => {
+    setProductList([...productList, product])
+  }
+
   const addToCart = (id) => {
 
     const product = productList.find((product) => product.id === id)
