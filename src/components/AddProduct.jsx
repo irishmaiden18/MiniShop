@@ -58,7 +58,7 @@ const AddProduct = () => {
             price: formData.price,
             customerReviews: customerReviews
         }
-        console.log(newProduct)
+        // console.log(newProduct)
 
         addProduct(newProduct)
 
