@@ -6,6 +6,8 @@ import Home from './components/Home'
 import Cart from './components/Cart'
 import { useEffect, useState } from 'react'
 import ProductListContext from './context/ProductListContext'
+import AddProduct from './components/AddProduct'
+import AuthenticationGuard from './components/AuthenticationGuard'
 
 function App() {
   
@@ -136,6 +138,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
       </Routes>
     </CartContext>
     </ProductListContext>
