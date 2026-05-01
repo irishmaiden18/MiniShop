@@ -2,17 +2,23 @@ import { useContext } from "react"
 import CartContext from "../context/CartContext"
 import MiniProductCard from "./MiniProductCard"
 import { Link } from "react-router"
+import OrdersContext from "../context/OrdersContext"
+import { useAuth0 } from "@auth0/auth0-react"
 
 const Cart = () => {
 
     const {cart} = useContext(CartContext)
 
+    const {orders, setOrders} = useContext(OrdersContext)
+
+    const {user} = useAuth0()
+
     const totalPrice = (array) => {
         let total = 0
         for (let i = 0; i < array.length; i++) {
             total += (Number(array[i].price) * Number(array[i].quantity))
-            console.log(array[i])
-            console.log(total)
+            // console.log(array[i])
+            // console.log(total)
         }
         return total
     }
@@ -21,6 +27,16 @@ const Cart = () => {
 
     const checkout = () => {
         alert(`Checked out! Total price: $${total}.00`)
+
+        console.log(cart)
+
+        if (orders.length === 0) {
+            setOrders([cart])
+        } else {
+            setOrders([...orders, [cart]])
+        }
+
+        console.log(orders)
     }
 
   return (

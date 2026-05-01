@@ -8,12 +8,16 @@ import { useEffect, useState } from 'react'
 import ProductListContext from './context/ProductListContext'
 import AddProduct from './components/AddProduct'
 import AuthenticationGuard from './components/AuthenticationGuard'
+import OrdersContext from './context/OrdersContext'
+import OrderHistory from './components/OrderHistory'
 
 function App() {
   
   const [cart, setCart] = useState([])
 
   const [productList, setProductList] = useState(null)
+
+  const [orders, setOrders] = useState([])
 
   const navigate = useNavigate()
 
@@ -124,29 +128,35 @@ function App() {
   }
 
   return (
-    <ProductListContext value={{
-      productList: productList,
-      setProductList: setProductList,
-      addProduct: addProduct
+    <OrdersContext value={{
+      orders: orders,
+      setOrders, setOrders
     }}>
-    <CartContext value={{
-      cart: cart,
-      setCart: setCart,
-      addToCart: addToCart,
-      increaseCartQuantity: increaseCartQuantity,
-      decreaseCartQuantity: decreaseCartQuantity
-    }}>
-      <h1>MiniShop</h1>
+      <ProductListContext value={{
+        productList: productList,
+        setProductList: setProductList,
+        addProduct: addProduct
+      }}>
+        <CartContext value={{
+          cart: cart,
+          setCart: setCart,
+          addToCart: addToCart,
+          increaseCartQuantity: increaseCartQuantity,
+          decreaseCartQuantity: decreaseCartQuantity
+        }}>
+          <h1>MiniShop</h1>
 
-      <Navbar/>
+          <Navbar/>
 
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
-      </Routes>
-    </CartContext>
-    </ProductListContext>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
+            <Route path="/orderHistory" element={<AuthenticationGuard component={OrderHistory}/>}/>
+          </Routes>
+        </CartContext>
+      </ProductListContext>
+    </OrdersContext>
   )
 }
 

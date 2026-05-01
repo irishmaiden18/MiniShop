@@ -31,6 +31,7 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
                 <Link to="/cart">Cart</Link>
                 {isAuthenticated && <Link to="/new">Add New Product</Link>}
+                {isAuthenticated && <Link to="/orderHistory">Order History</Link>}
             </div>
             <div>
               <h3>Cart: {totalItemsInCart}</h3>
