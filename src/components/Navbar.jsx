@@ -1,15 +1,16 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router"
 import CartContext from "../context/CartContext"
 import { useAuth0 } from "@auth0/auth0-react"
 import LogoutButton from "./LogoutButton"
 import LoginButton from "./LoginButton"
-import profileIcon from "/profileIcon.svg"
+import { PersonCircle } from "react-bootstrap-icons"
+import ProfileImage from "./ProfileImage"
+
 
 const Navbar = () => {
 
   const {isAuthenticated, user} = useAuth0()
-  // console.log(user)
 
   const {cart} = useContext(CartContext)
 
@@ -37,11 +38,13 @@ const Navbar = () => {
             <div>
               {isAuthenticated ?
                 <>
-                  <p>Welcome {user.name}! <img src={user.picture} alt={`${user.name} pic`} width={50} onError={(e) => (e.currentTarget.src=profileIcon)}/></p>
+                  <p>Welcome {user.name}! <ProfileImage/></p>
+
                   <LogoutButton/>
                 </> :
                 <>
-                  <p>Welcome Guest! <img src={profileIcon}/></p>
+                {/*  <img src={profileIcon}/>*/}
+                  <p>Welcome Guest! <PersonCircle color="royalblue" size={50}/></p>
                   <LoginButton/>
                 </>
               }
