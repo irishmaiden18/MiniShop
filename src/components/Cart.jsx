@@ -33,7 +33,7 @@ const Cart = () => {
         if (orders.length === 0) {
             setOrders([cart])
         } else {
-            setOrders([...orders, [cart]])
+            setOrders([...orders, cart])
         }
 
         console.log(orders)

@@ -20,9 +20,7 @@ const OrderHistory = () => {
                         <ul>
                             {cart.map((product) => (
                                 <li key={product.id}>
-                                    <img src={product.images[0]} alt={`${product.title} pic`} width={250} />
-                                    <h2>{product.title}</h2>
-                                    <p>${product.price}.00</p>
+                                    <MiniProductCard product={product} quantity={product.quantity}/>
                                 </li>
                             ))}
                         </ul>
