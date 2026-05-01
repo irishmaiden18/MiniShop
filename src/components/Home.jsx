@@ -8,6 +8,8 @@ const Home = () => {
 
     const [filterBy, setFilterBy] = useState("")
 
+    const [search, setSearch] = useState("")
+
     const filterProducts = (filteredBy) => {
         const filteredProducts = productList.filter((product) => {
             return product.category.slug === filteredBy
@@ -29,7 +31,13 @@ const Home = () => {
 
         } else if (filterBy === "miscellaneous") {
             return filterProducts("miscellaneous")
-
+        
+        } else if (search !== "") {
+            const filteredProducts = productList.filter((product) => {
+                return product.title.toLowerCase().includes(search)
+            })
+            return filteredProducts
+            
         } else {
             return productList
         }
@@ -41,6 +49,14 @@ const Home = () => {
     return (
         <>
             <h2>Home</h2>
+            <div>
+                <label>Search</label>
+                <input 
+                    type="text"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                />
+            </div>
             <button onClick={() => setFilterBy("electronics")}>Electronics</button>
             <button onClick={() => setFilterBy("furniture")}>Furniture</button>
             <button onClick={() => setFilterBy("clothes")}>Clothing</button>
