@@ -4,7 +4,7 @@ import CartContext from "../context/CartContext"
 import { useAuth0 } from "@auth0/auth0-react"
 import LogoutButton from "./LogoutButton"
 import LoginButton from "./LoginButton"
-import { PersonCircle } from "react-bootstrap-icons"
+import { PersonCircle, Cart2 } from "react-bootstrap-icons"
 import ProfileImage from "./ProfileImage"
 
 
@@ -34,7 +34,7 @@ const Navbar = () => {
                 {isAuthenticated && <Link to="/orderHistory">Order History</Link>}
             </div>
             <div>
-              <h3>Cart: {totalItemsInCart}</h3>
+              <h3><Cart2 color="black" size={50}/> {totalItemsInCart}</h3>
             </div>
             <div>
               {isAuthenticated ?
