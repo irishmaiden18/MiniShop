@@ -10,6 +10,10 @@ const Home = () => {
 
     const [search, setSearch] = useState("")
 
+    const [electronicsSelect, setElectronicsSelect] = useState("")
+
+    const [isElectronicsOpen, setIsElectronicsOpen] = useState("")
+
     const filterProducts = (filteredBy) => {
         const filteredProducts = productList.filter((product) => {
             return product.category.slug === filteredBy
@@ -18,10 +22,27 @@ const Home = () => {
     }
 
     const filteredProducts = () => {
-        if (filterBy === "electronics") {
-            return filterProducts("electronics")
+        // if (filterBy === "electronics") {
+        //     return filterProducts("electronics")
 
-        } else if (filterBy === "furniture") {
+        // } 
+        if (electronicsSelect === "all") {
+            const electronics = filterProducts("electronics")
+            const other = filterProducts("updated-category-name")
+            // return filterProducts("electronics")
+            return [...electronics, ...other]
+        } else if (electronicsSelect === "laptops") {
+            const filteredProducts = productList.filter((product) => {
+                return product.title.toLowerCase().includes("laptop")
+            })
+            return filteredProducts
+        } else if (electronicsSelect === "headphones") {
+            const filteredProducts = productList.filter((product) => {
+                return product.title.toLowerCase().includes("headphones")
+            })
+            return filteredProducts
+        }
+        else if (filterBy === "furniture") {
             const furniture = filterProducts("furniture")
             const love = filterProducts("love-is-light")
             return [...furniture, ...love]
@@ -44,7 +65,7 @@ const Home = () => {
     }
 
     let filteredProductList = filteredProducts()
-    // console.log(filteredProductList)
+    console.log(productList)
 
     return (
         <>
@@ -58,6 +79,18 @@ const Home = () => {
                 />
             </div>
             <button onClick={() => setFilterBy("electronics")}>Electronics</button>
+            <select 
+                name="electronics"
+                value={electronicsSelect}
+                onChange={(event) => {setElectronicsSelect(event.target.value)}}
+                >
+                    <option value="">Select an option</option>
+                    <option value="all">All</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="headphones">Headphones</option>
+                    <option value="phones">Phones</option>
+                    <option value="other">Other</option>
+            </select>
             <button onClick={() => setFilterBy("furniture")}>Furniture</button>
             <button onClick={() => setFilterBy("clothes")}>Clothing</button>
             <button onClick={() => setFilterBy("miscellaneous")}>Misc</button>
