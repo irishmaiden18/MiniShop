@@ -24,11 +24,19 @@ const AddProduct = () => {
 
         const {name, value} = event.target
 
-        const updatedFormData = {
-            ...formData,
-            [name]: value
+        if (name === "images") {
+            const updatedFormData = {
+                ...formData,
+                images: [URL.createObjectURL(event.target.files[0])]
+            }
+            setFormData(updatedFormData)
+        } else {
+            const updatedFormData = {
+                ...formData,
+                [name]: value
+            }
+            setFormData(updatedFormData)
         }
-        setFormData(updatedFormData)
     }
 
     const handleSubmit = (event) => {
@@ -88,6 +96,8 @@ const AddProduct = () => {
                     <option value="">Select a category</option>
                     <option value="electronics">Electronics</option>
                     <option value="furniture">Furniture</option>
+                    <option value="clothes">Clothing</option>
+                    <option value="miscellaneous">Misc</option>
                 </select>
             </div>
             <div>
@@ -110,11 +120,12 @@ const AddProduct = () => {
                 ></textarea>
             </div>
             <div>
-                <label>Image URL: </label>
+                <label>Image: </label>
                 <input 
-                    type="text"
+                    type="file" 
+                    accept="image/*"
                     name="images"
-                    onChange={handleChange}
+                    onChange={handleChange} 
                 />
             </div>
             <div>
