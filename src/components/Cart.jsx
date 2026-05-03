@@ -4,6 +4,8 @@ import MiniProductCard from "./MiniProductCard"
 import { Link } from "react-router"
 import OrdersContext from "../context/OrdersContext"
 import { useAuth0 } from "@auth0/auth0-react"
+import {PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js"
+import CheckoutComponent from "./CheckoutComponent"
 
 const Cart = () => {
 
@@ -13,12 +15,12 @@ const Cart = () => {
 
     const {user} = useAuth0()
 
+    const apiKey = import.meta.env.VITE_PAYPAL_CLIENT_ID
+
     const totalPrice = (array) => {
         let total = 0
         for (let i = 0; i < array.length; i++) {
             total += (Number(array[i].price) * Number(array[i].quantity))
-            // console.log(array[i])
-            // console.log(total)
         }
         return total
     }
@@ -39,6 +41,12 @@ const Cart = () => {
         console.log(orders)
     }
 
+    const initialOptions = {
+        "client-id": apiKey,
+        currency: "USD",
+        intent: "capture"
+    }
+
   return (
     <>
         <h2>Cart</h2>
@@ -56,6 +64,9 @@ const Cart = () => {
         <h3>Total Price: ${total}.00</h3>
         <Link to="/"><button>Continue Shopping</button></Link>
         <button onClick={checkout}>Checkout</button>
+        <PayPalScriptProvider options={initialOptions}>
+            <CheckoutComponent PayPalButtons={PayPalButtons} total={total} />
+        </PayPalScriptProvider>
     </>
   )
 }

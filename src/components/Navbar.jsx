@@ -6,6 +6,7 @@ import LogoutButton from "./LogoutButton"
 import LoginButton from "./LoginButton"
 import { PersonCircle, Cart2 } from "react-bootstrap-icons"
 import ProfileImage from "./ProfileImage"
+import OrdersContext from "../context/OrdersContext"
 
 
 const Navbar = () => {
@@ -13,6 +14,8 @@ const Navbar = () => {
   const {isAuthenticated, user} = useAuth0()
 
   const {cart} = useContext(CartContext)
+
+  const {orders} = useContext(OrdersContext)
 
   const cartTotal = (array) => {
     let total = 0
@@ -31,7 +34,7 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
                 <Link to="/cart">Cart</Link>
                 {isAuthenticated && <Link to="/new">Add New Product</Link>}
-                {isAuthenticated && <Link to="/orderHistory">Order History</Link>}
+                {isAuthenticated && <Link to="/orderHistory">Order History {orders.length}</Link>}
             </div>
             <div>
               <h3><Cart2 color="black" size={50}/> {totalItemsInCart}</h3>

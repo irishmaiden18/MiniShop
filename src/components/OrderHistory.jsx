@@ -16,7 +16,7 @@ const OrderHistory = () => {
             {orders ? (
                 orders.map((cart, index) => (
                     <li key={index}>
-                        <h3>Order {index}</h3>
+                        <h3>Order {index + 1}</h3>
                         <ul>
                             {cart.map((product) => (
                                 <li key={product.id}>
