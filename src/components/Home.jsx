@@ -31,15 +31,29 @@ const Home = () => {
         setIsFurnitureOpen(false)
     }
 
+    const handleMiscButton = () => {
+        setFilterBy("miscellaneous")
+        setIsElectronicsOpen(false)
+        setIsFurnitureOpen(false)
+        setIsClothingOpen(false)
+    }
+
+    const handleAllButton = () => {
+        setFilterBy("")
+        setIsElectronicsOpen(false)
+        setIsFurnitureOpen(false)
+        setIsClothingOpen(false)
+    }
+
     useEffect(() => {
         if (isClothingOpen) {
-            setFilterBy('all-clothing')
+            setFilterBy("all-clothing")
         } else if (isFurnitureOpen) {
-            setFilterBy('all-furniture')
+            setFilterBy("all-furniture")
         } else if (isElectronicsOpen) {
-            setFilterBy('all-electronics')
+            setFilterBy("all-electronics")
         } else {
-            setFilterBy('')
+            setFilterBy("")
         }
     }, [isClothingOpen, isFurnitureOpen, isElectronicsOpen])
 
@@ -176,8 +190,8 @@ const Home = () => {
                 <button onClick={toggleElectronicsDropdown}>Electronics</button>
                 <button onClick={toggleFurnitureDropdown}>Furniture</button>
                 <button onClick={toggleClothingDropdown}>Clothing</button>
-                <button onClick={() => setFilterBy("miscellaneous")}>Misc</button>
-                <button onClick={() => setFilterBy("")}>All Products</button>
+                <button onClick={handleMiscButton}>Misc</button>
+                <button onClick={handleAllButton}>All Products</button>
             </div>
             <div>
                 {isElectronicsOpen && (
