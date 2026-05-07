@@ -19,27 +19,11 @@ const Home = () => {
         setIsClothingOpen(false)
     }
 
-    useEffect(() => {
-        if (isElectronicsOpen) {
-            setFilterBy("all-electronics")
-        } else {
-            setFilterBy("")
-        }
-    }, [isElectronicsOpen])
-
     const toggleFurnitureDropdown = () => {
         setIsFurnitureOpen(!isFurnitureOpen)
         setIsElectronicsOpen(false)
         setIsClothingOpen(false)
     }
-
-    useEffect(() => {
-        if (isFurnitureOpen) {
-            setFilterBy("all-furniture")
-        } else {
-            setFilterBy("")
-        }
-    }, [isFurnitureOpen])
     
     const toggleClothingDropdown = () => {
         setIsClothingOpen(!isClothingOpen)
@@ -49,11 +33,15 @@ const Home = () => {
 
     useEffect(() => {
         if (isClothingOpen) {
-            setFilterBy("all-clothing")
+            setFilterBy('all-clothing')
+        } else if (isFurnitureOpen) {
+            setFilterBy('all-furniture')
+        } else if (isElectronicsOpen) {
+            setFilterBy('all-electronics')
         } else {
-            setFilterBy("")
+            setFilterBy('')
         }
-    }, [setIsClothingOpen])
+    }, [isClothingOpen, isFurnitureOpen, isElectronicsOpen])
 
     const filterProducts = (filteredBy) => {
         const filteredProducts = productList.filter((product) => {
