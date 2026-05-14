@@ -144,7 +144,7 @@ function App() {
           increaseCartQuantity: increaseCartQuantity,
           decreaseCartQuantity: decreaseCartQuantity
         }}>
-          <h1>MiniShop</h1>
+          <h1><img src="cat_pushing_shopping_cart.png" alt="orange cat pushing a shopping cart" width={70} style={{borderRadius: "50%", objectFit: "cover"}}/>MiniShop</h1>
 
           <Navbar/>
 
