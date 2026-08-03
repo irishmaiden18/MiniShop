@@ -1,5 +1,5 @@
 /*Nav Styles*/
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,7 +11,7 @@
   margin-left: 1rem;
   text-decoration: none;
   color: inherit;
-}
+} */
 
 /*Modal Styles*/
 .modal-overlay {

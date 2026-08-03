@@ -13,7 +13,7 @@ const ProfileImage = () => {
 
   return (
     <>
-        <img src={user.picture} alt={`${user.name} pic`} width={50} onError={() => (setHasError(true))}/>
+        <img src={user.picture} alt={`${user.name} pic`} width={40} className="rounded-full" onError={() => (setHasError(true))}/>
     </>
   )
 }

@@ -130,7 +130,7 @@ function App() {
   return (
     <OrdersContext value={{
       orders: orders,
-      setOrders, setOrders
+      setOrders: setOrders
     }}>
       <ProductListContext value={{
         productList: productList,
