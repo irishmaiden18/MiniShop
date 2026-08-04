@@ -94,22 +94,12 @@ const AddProduct = () => {
                     onChange={handleChange}
                 >
                     <option value="">Select a category</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="clothes">Clothing</option>
-                    <option value="miscellaneous">Misc</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="kitchen-accessories">Kitchen Accessories</option>
+                    <option value="beauty">Beauty</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="home-decoration">Home Decoration</option>
                 </select>
-            </div>
-            <div>
-                <label>Customer Rating: </label>
-                <input 
-                    type="number" 
-                    min={1} 
-                    max={5}
-                    name="customerRating"
-                    value={formData.customerRating}
-                    onChange={handleChange}
-                />
             </div>
             <div>
                 <label>Description: </label>

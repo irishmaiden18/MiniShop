@@ -50,6 +50,7 @@ const Cart = () => {
   return (
     <>
         <h2>Cart</h2>
+        <h3>PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
         <ul>
             {cart ? (
                 cart.map((product) => (

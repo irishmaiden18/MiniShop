@@ -23,30 +23,32 @@ function App() {
 
   useEffect (() => {
       const fetchData = async () => {
-          const res = await fetch("https://api.escuelajs.co/api/v1/products")
+          // const res = await fetch("https://api.escuelajs.co/api/v1/products")
+          const res = await fetch("https://dummyjson.com/products?limit=0")
           const resData = await res.json()
-
-          const updatedProductList = resData.map ((product) => {
+          // console.log(resData)
+        //   const updatedProductList = resData.products.map ((product) => {
             
-            const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-            const numReviews = Math.floor(Math.random() * 6)
-            let customerReviews = []
-            for (let i = 0; i < numReviews; i++) {
-              const randomText = Math.floor(Math.random() * 203) + 10
-              const review = string.slice(0, randomText)
-              customerReviews.push(review)
-            }
+        //     const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
+        //     const numReviews = Math.floor(Math.random() * 6)
+        //     let customerReviews = []
+        //     for (let i = 0; i < numReviews; i++) {
+        //       const randomText = Math.floor(Math.random() * 203) + 10
+        //       const review = string.slice(0, randomText)
+        //       customerReviews.push(review)
+        //     }
 
-            const updatedProduct ={
-              ...product,
-              customerRating: (Math.random() * 5).toFixed(1),
-              customerReviews: customerReviews
-            }
+        //     const updatedProduct ={
+        //       ...product,
+        //       customerRating: (Math.random() * 5).toFixed(1),
+        //       customerReviews: customerReviews
+        //     }
             
-            return updatedProduct
-          })
+        //     return updatedProduct
+        //   })
 
-        setProductList(updatedProductList)
+        // setProductList(updatedProductList)
+        setProductList(resData.products)
       }
       fetchData()
   }, [])

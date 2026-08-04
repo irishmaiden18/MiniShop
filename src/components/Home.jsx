@@ -9,57 +9,56 @@ const Home = () => {
     const [filterBy, setFilterBy] = useState("")
     const [search, setSearch] = useState("")
 
-    const [isElectronicsOpen, setIsElectronicsOpen] = useState(false)
-    const [isFurnitureOpen, setIsFurnitureOpen] = useState(false)
+    const [isGroceriesOpen, setIsGroceriesOpen] = useState(false)
     const [isClothingOpen, setIsClothingOpen] = useState(false)
 
-    const toggleElectronicsDropdown = () => {
-        setIsElectronicsOpen(!isElectronicsOpen)
-        setIsFurnitureOpen(false)
-        setIsClothingOpen(false)
-    }
-
-    const toggleFurnitureDropdown = () => {
-        setIsFurnitureOpen(!isFurnitureOpen)
-        setIsElectronicsOpen(false)
+    const toggleGroceriesDropdown = () => {
+        setIsGroceriesOpen(!isGroceriesOpen)
         setIsClothingOpen(false)
     }
     
     const toggleClothingDropdown = () => {
         setIsClothingOpen(!isClothingOpen)
-        setIsElectronicsOpen(false)
-        setIsFurnitureOpen(false)
+        setIsGroceriesOpen(false)
     }
 
-    const handleMiscButton = () => {
-        setFilterBy("miscellaneous")
-        setIsElectronicsOpen(false)
-        setIsFurnitureOpen(false)
+    const handleHomeDecorButton = () => {
+        setFilterBy("home-decoration")
+        setIsGroceriesOpen(false)
+        setIsClothingOpen(false)
+    }
+
+    const handleBeautyButton = () => {
+        setFilterBy("beauty")
+        setIsGroceriesOpen(false)
+        setIsClothingOpen(false)
+    }
+
+    const handleKitchenAccessoryButton = () => {
+        setFilterBy("kitchen-accessories")
+        setIsGroceriesOpen(false)
         setIsClothingOpen(false)
     }
 
     const handleAllButton = () => {
         setFilterBy("")
-        setIsElectronicsOpen(false)
-        setIsFurnitureOpen(false)
+        setIsGroceriesOpen(false)
         setIsClothingOpen(false)
     }
 
     useEffect(() => {
         if (isClothingOpen) {
             setFilterBy("all-clothing")
-        } else if (isFurnitureOpen) {
-            setFilterBy("all-furniture")
-        } else if (isElectronicsOpen) {
-            setFilterBy("all-electronics")
+        } else if (isGroceriesOpen) {
+            setFilterBy("all-groceries")
         } else {
             setFilterBy("")
         }
-    }, [isClothingOpen, isFurnitureOpen, isElectronicsOpen])
+    }, [isClothingOpen, isGroceriesOpen])
 
     const filterProducts = (filteredBy) => {
         const filteredProducts = productList.filter((product) => {
-            return product.category.slug === filteredBy
+            return product.category === filteredBy
         })
         return filteredProducts
     }
@@ -67,6 +66,13 @@ const Home = () => {
     const filterProductsTitle = (filteredBy) => {
         const filteredProducts = productList.filter((product) => {
             return product.title.toLowerCase().includes(filteredBy)
+        })
+        return filteredProducts
+    }
+
+    const filterProductsTag = (filteredBy) => {
+        const filteredProducts = productList.filter((product) => {
+            return product.tags.includes(filteredBy)
         })
         return filteredProducts
     }
@@ -81,88 +87,73 @@ const Home = () => {
 
     const filteredProducts = () => {
         console.log(filterBy)
-        if (filterBy === "all-electronics") {
-            const electronics = filterProducts("electronics")
-            const other = filterProducts("updated-category-name")
-            return [...electronics, ...other]
 
-        } else if (filterBy === "laptops") {
-            return filterProductsTitle("laptop")
+        if (filterBy === "all-groceries") {
+            const groceries = filterProducts("groceries")
+            return groceries
 
-        } else if (filterBy === "headphones") {
-            return filterProductsTitle("headphones")
+        } else if (filterBy === "pet supplies") {
+            return filterProductsTag("pet supplies")
+
+        } else if (filterBy === "fruits") {
+            return filterProductsTag("fruits")
         
-        } else if (filterBy === "phones") {
-            return filterProductsTitle(" phone")
+        } else if (filterBy === "vegetables") {
+            return filterProductsTag("vegetables")
 
-        } else if (filterBy === "other-electronics") {
-            const electronics = filterProducts("electronics")
-            const other = filterProducts("updated-category-name")
-            const targets = ["laptop", "headphone", " phone"]
-            const filteredProducts = [...electronics, ...other].filter((product) => {
-                return !targets.some(target => product.title.toLowerCase().includes(target))
+        } else if (filterBy === "meat") {
+            return filterProductsTag("meat")
+
+        } else if (filterBy === "other-groceries") {
+            const groceries = filterProducts("groceries")
+            const targets = ["pet supplies", "fruits", "vegetables", "meat"]
+            const filteredProducts = groceries.filter((product) => {
+                return !targets.some(target => product.tags.includes(target))
             })
             return filteredProducts
         }
 
-
-        else if (filterBy === "all-furniture") {
-            const furniture = filterProducts("furniture")
-            const love = filterProducts("love-is-light")
-            return [...furniture, ...love]
+        else if (filterBy === "beauty") {
+            return filterProducts("beauty")
+        } 
         
-        } else if (filterBy === "chairs") {
-            return filterProductsTitle("chair")
-
-        } else if (filterBy === "tables") {
-            return filterProductsTitle("table")
-        
-        } else if (filterBy === "couches") {
-            const sofas = filterProductsTitle("sofa")
-            const couches = filterProductsTitle("couch")
-            return [...sofas, ...couches]
-
-        } else if (filterBy === "other-furniture") {
-            const furniture = filterProducts("furniture")
-            const love = filterProducts("love-is-light")
-            const targets = ["chair", "table", "sofa"]
-            const filteredProducts = [...furniture, ...love].filter((product) => {
-                return !targets.some(target => product.title.toLowerCase().includes(target))
-            })
-            return filteredProducts
-        }
-
-
         else if (filterBy === "all-clothing") {
-            return filterProducts("clothes")
+            const clothing = filterProductsTag("clothing")
+            const footwear = filterProductsTag("footwear")
+            const watches = filterProductsTag("watches")
+            return [...clothing, ...footwear, ...watches]
+        
+        } else if (filterBy === "mens-shirts") {
+            const mensShirts = filterProducts("mens-shirts")
+            return mensShirts
+        
+        } else if (filterBy === "footwear") {
+            return filterProductsTag("footwear")
 
-        } else if (filterBy === "hoodie") {
-            const hoodies = filterProductsTitle("hoodie")
-            const sweatshirts = filterProductsTitle("hooded")
-            return [...hoodies, ...sweatshirts]
-
-        } else if (filterBy === "hat") {
-            return filterProductsTitle("cap")
-
-        } else if (filterBy === "t-shirt") {
-            const tS = filterProductsTitle("t-shirt")
-            const tees = filterProductsTitle("tee")
-            return [...tS, ...tees]
+        } else if (filterBy === "watches") {
+            const watches = filterProductsTag("watches")
+            return watches
 
         } else if (filterBy === "other-clothing") {
-            const clothes = filterProducts("clothes")
-            const targets = ["hoodie", "hooded", "tee", "cap", "t-shirt"]
-            const filteredProducts = clothes.filter((product) => {
-                return !targets.some(target => product.title.toLowerCase().includes(target))
+            const clothing = filterProductsTag("clothing")
+            const footwear = filterProductsTag("footwear")
+            const watches = filterProductsTag("watches")
+            const targets = ["men's shirts", "men's t-shirts", "footwear", "watches"]
+            const filteredProducts = [...clothing, ...footwear, ...watches].filter((product) => {
+                return !targets.some(target => product.tags.includes(target))
             })
             return filteredProducts
         }
         
-        
-        else if (filterBy === "miscellaneous") {
-            return filterProducts("miscellaneous")
-        
-        } else if (search !== "") {
+        else if (filterBy === "home-decoration") {
+            return filterProducts("home-decoration")
+        } 
+
+        else if (filterBy === "kitchen-accessories") {
+            return filterProducts("kitchen-accessories")
+        }
+
+        else if (search !== "") {
             return filterProductsTitle(search)
             
         } else {
@@ -187,39 +178,29 @@ const Home = () => {
             </div>
             
             <div>
-                <button onClick={toggleElectronicsDropdown}>Electronics</button>
-                <button onClick={toggleFurnitureDropdown}>Furniture</button>
+                <button onClick={toggleGroceriesDropdown}>Groceries</button>
+                <button onClick={handleKitchenAccessoryButton}>Kitchen Accessories</button>
+                <button onClick={handleBeautyButton}>Beauty</button>
                 <button onClick={toggleClothingDropdown}>Clothing</button>
-                <button onClick={handleMiscButton}>Misc</button>
+                <button onClick={handleHomeDecorButton}>Home Decoration</button>
                 <button onClick={handleAllButton}>All Products</button>
             </div>
             <div>
-                {isElectronicsOpen && (
+                {isGroceriesOpen && (
                     <select
-                        name="electronics"
+                        name="groceries"
                         value={filterBy}
                         onChange={(event) => {setFilterBy(event.target.value)}}
                     >
-                        <option value="all-electronics">All</option>
-                        <option value="laptops">Laptops</option>
-                        <option value="headphones">Headphones</option>
-                        <option value="phones">Phones</option>
-                        <option value="other-electronics">Other</option>
+                        <option value="all-groceries">All</option>
+                        <option value="pet supplies">Pet Supplies</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="meat">Meat</option>
+                        <option value="other-groceries">Other</option>
                     </select>
                 )}
-                {isFurnitureOpen && (
-                    <select
-                        name="furniture"
-                        value={filterBy}
-                        onChange={(event) => {setFilterBy(event.target.value)}}
-                    >
-                        <option value="all-furniture">All</option>
-                        <option value="chairs">Chairs</option>
-                        <option value="tables">Tables</option>
-                        <option value="couches">Couches</option>
-                        <option value="other-furniture">Other</option>
-                    </select>
-                )}
+    
                 {isClothingOpen && (
                     <select
                         name="clothing"
@@ -227,9 +208,9 @@ const Home = () => {
                         onChange={(event) => {setFilterBy(event.target.value)}}
                     >
                         <option value="all-clothing">All</option>
-                        <option value="hoodie">Hoodies</option>
-                        <option value="hat">Hats</option>
-                        <option value="t-shirt">T-Shirts</option>
+                        <option value="mens-shirts">Men's Shirts</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="watches">Watches</option>
                         <option value="other-clothing">Other</option>
                     </select>
                 )}

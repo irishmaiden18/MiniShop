@@ -14,7 +14,7 @@ const MiniProductCard = ({product, quantity}) => {
             <div>
                 <img src={product.images[0]} alt={`${product.title} pic`} width={250} />
                 <h2>{product.title}</h2>
-                <p>${product.price}.00</p>
+                <p>${product.price}</p>
                 <button onClick={() => setIsModalOpen(true)}>More Info</button>
                 {quantity ? 
                     <p>
@@ -27,14 +27,21 @@ const MiniProductCard = ({product, quantity}) => {
                 <h1>Info</h1>
                 <img src={product.images[0]} alt={`${product.title} pic`} width={250} />
                 <h2>{product.title}</h2>
-                <p>${product.price}.00</p>
-                <p>Customer Rating: {product.customerRating}</p>
+                <p>${product.price}</p>
+                <p>Customer Rating: {product.rating}</p>
                 <p>{product.description}</p>
-                <h4>Customer Reviews: </h4>
+                <h4>Customer Reviews:</h4>
                 <ul>
-                    {product.customerReviews.map((review) => (
-                        <li>{review}</li>
-                    ))}
+                    {(product.reviews && product.reviews.length > 0) ? (product.reviews.map((review, index) => (
+                        <li key={index}>
+                            <p>Rating: {review.rating}</p>
+                            <p>Review: {review.comment}</p>
+                            <p>Date Posted: {review.date}</p>
+                            <p>Posted By: {review.reviewerName}</p>
+                        </li>
+                    )))
+                    : "There are no customer reviews for this product"
+                    }
                 </ul>
             </Modal>
         </>
