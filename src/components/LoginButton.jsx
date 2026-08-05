@@ -7,7 +7,12 @@ const LoginButton = () => {
 
   return (
     <>
-        <button onClick={loginWithRedirect}>Login</button>
+        <button 
+          onClick={loginWithRedirect}
+          className="bg-[#D2B48C] px-3 py-1 ml-2 lg:ml-3 rounded-md text-black"
+        >
+          Login
+        </button>
     </>
   )
 }

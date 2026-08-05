@@ -10,6 +10,7 @@ import AddProduct from './components/AddProduct'
 import AuthenticationGuard from './components/AuthenticationGuard'
 import OrdersContext from './context/OrdersContext'
 import OrderHistory from './components/OrderHistory'
+import DuringDevelopment from './components/DuringDevelopment'
 
 function App() {
   
@@ -22,35 +23,12 @@ function App() {
   const navigate = useNavigate()
 
   useEffect (() => {
-      const fetchData = async () => {
-          // const res = await fetch("https://api.escuelajs.co/api/v1/products")
-          const res = await fetch("https://dummyjson.com/products?limit=0")
-          const resData = await res.json()
-          // console.log(resData)
-        //   const updatedProductList = resData.products.map ((product) => {
-            
-        //     const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-        //     const numReviews = Math.floor(Math.random() * 6)
-        //     let customerReviews = []
-        //     for (let i = 0; i < numReviews; i++) {
-        //       const randomText = Math.floor(Math.random() * 203) + 10
-        //       const review = string.slice(0, randomText)
-        //       customerReviews.push(review)
-        //     }
-
-        //     const updatedProduct ={
-        //       ...product,
-        //       customerRating: (Math.random() * 5).toFixed(1),
-        //       customerReviews: customerReviews
-        //     }
-            
-        //     return updatedProduct
-        //   })
-
-        // setProductList(updatedProductList)
-        setProductList(resData.products)
-      }
-      fetchData()
+    const fetchData = async () => {
+      const res = await fetch("https://dummyjson.com/products?limit=0")
+      const resData = await res.json()
+      setProductList(resData.products)
+    }
+    fetchData()
   }, [])
 
   const addProduct = (product) => {
@@ -69,6 +47,7 @@ function App() {
         quantity: 1
       }
       setCart([...cart, newCartProduct])
+
     } else {
 
       const updatedCart = cart.map ((product) => {
@@ -146,16 +125,23 @@ function App() {
           increaseCartQuantity: increaseCartQuantity,
           decreaseCartQuantity: decreaseCartQuantity
         }}>
-          <h1><img src="cat_pushing_shopping_cart.png" alt="orange cat pushing a shopping cart" width={70} style={{borderRadius: "50%", objectFit: "cover"}}/>MiniShop</h1>
 
-          <Navbar/>
+          <DuringDevelopment/>
 
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/cart" element={<Cart/>}/>
-            <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
-            <Route path="/orderHistory" element={<AuthenticationGuard component={OrderHistory}/>}/>
-          </Routes>
+          <div className="bg-[#E4D2BA]">
+
+            <div className="container mx-auto">
+
+              <Navbar/>
+
+              <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/cart" element={<Cart/>}/>
+                <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
+                <Route path="/orderHistory" element={<AuthenticationGuard component={OrderHistory}/>}/>
+              </Routes>
+            </div>
+          </div>
         </CartContext>
       </ProductListContext>
     </OrdersContext>

@@ -8,12 +8,12 @@ const ProfileImage = () => {
     const [hasError, setHasError] = useState(false)
 
     if (hasError) {
-        return <PersonCircle color="royalblue" size={50}/>
+        return <PersonCircle color="white" size={25}/>
     }
 
   return (
     <>
-        <img src={user.picture} alt={`${user.name} pic`} width={40} className="rounded-full" onError={() => (setHasError(true))}/>
+        <img src={user.picture} alt={`${user.name} pic`} width={25} className="rounded-full" onError={() => (setHasError(true))}/>
     </>
   )
 }

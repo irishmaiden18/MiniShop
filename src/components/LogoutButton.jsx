@@ -6,9 +6,13 @@ const LogoutButton = () => {
 
     return (
         <>
-            <button onClick={() => {
-                logout({logoutParams: {returnTo: window.location.origin}})
-            }}>
+            <button 
+                onClick={() => {
+                        logout({logoutParams: {returnTo: window.location.origin}})
+                    }}
+                className="bg-[#D2B48C] px-3 py-1 ml-2 lg:ml-3 rounded-md text-black"
+                >
+
                 Logout
             </button>
         </>
