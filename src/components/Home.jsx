@@ -162,35 +162,43 @@ const Home = () => {
     }
 
     let filteredProductList = filteredProducts()
-    console.log(filteredProductList)
+    // console.log(filteredProductList)
     // console.log(productList)
+
+    const normalColor = "bg-[#01796F] hover:bg-[#004D46]"
+    
+    // /30 means at 30% opacity
+    const activeColor = "!bg-[#004D46] ring-4 ring-[#01796F]/30"
 
     return (
         <>
             {/* <h2>Home</h2> */}
-            <div>
-                <label>Search</label>
+            <div className="flex justify-center items-center w-full mb-4">
+                <label className="bg-[#01796F] text-white p-3 my-4 inline-block rounded-l-xl">Search</label>
                 <input 
                     type="text"
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
+                    className="bg-[#FAF0E6] text-black p-3 w-[80%] rounded-r-xl"
                 />
             </div>
             
-            <div>
-                <button onClick={toggleGroceriesDropdown}>Groceries</button>
-                <button onClick={handleKitchenAccessoryButton}>Kitchen Accessories</button>
-                <button onClick={handleBeautyButton}>Beauty</button>
-                <button onClick={toggleClothingDropdown}>Clothing</button>
-                <button onClick={handleHomeDecorButton}>Home Decoration</button>
-                <button onClick={handleAllButton}>All Products</button>
+            <div className="grid grid-cols-3 lg:flex lg:justify-around lg:items-center gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-[80%] lg:w-[96%] mx-auto">
+                <button onClick={toggleGroceriesDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isGroceriesOpen ? activeColor : normalColor}`}>Groceries</button>
+                <button onClick={handleKitchenAccessoryButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Kitchen Accessories</button>
+                <button onClick={handleBeautyButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Beauty</button>
+                <button onClick={toggleClothingDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isClothingOpen ? activeColor : normalColor}`}>Clothing</button>
+                <button onClick={handleHomeDecorButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Home Decoration</button>
+                <button onClick={handleAllButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>All Products</button>
             </div>
-            <div>
+            <div className="flex justify-start items-center w-[50%] bg-[#FAF0E6] text-black mx-auto mt-4">
                 {isGroceriesOpen && (
                     <select
                         name="groceries"
                         value={filterBy}
                         onChange={(event) => {setFilterBy(event.target.value)}}
+                        className="w-full bg-[#FAF0E6] text-black"
+                        
                     >
                         <option value="all-groceries">All</option>
                         <option value="pet supplies">Pet Supplies</option>
@@ -206,6 +214,7 @@ const Home = () => {
                         name="clothing"
                         value={filterBy}
                         onChange={(event) => {setFilterBy(event.target.value)}}
+                        className="w-full bg-[#FAF0E6] text-black"
                     >
                         <option value="all-clothing">All</option>
                         <option value="mens-shirts">Men's Shirts</option>
