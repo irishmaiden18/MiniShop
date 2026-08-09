@@ -11,6 +11,7 @@ import AuthenticationGuard from './components/AuthenticationGuard'
 import OrdersContext from './context/OrdersContext'
 import OrderHistory from './components/OrderHistory'
 import DuringDevelopment from './components/DuringDevelopment'
+import Footer from './components/Footer'
 
 function App() {
   
@@ -128,18 +129,22 @@ function App() {
 
           <DuringDevelopment/>
 
-          <div className="bg-[#E4D2BA]">
+          <div className="bg-[#E4D2BA] min-h-screen flex flex-col">
 
-            <div className="container mx-auto">
+            <div className="container mx-auto flex flex-col flex-1">
 
               <Navbar/>
 
-              <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/cart" element={<Cart/>}/>
-                <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
-                <Route path="/orderHistory" element={<AuthenticationGuard component={OrderHistory}/>}/>
-              </Routes>
+              <main className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Home/>}/>
+                  <Route path="/cart" element={<Cart/>}/>
+                  <Route path="/new" element={<AuthenticationGuard component={AddProduct} />}/>
+                  <Route path="/orderHistory" element={<AuthenticationGuard component={OrderHistory}/>}/>
+                </Routes>
+              </main>
+              
+              <Footer/>
             </div>
           </div>
         </CartContext>
