@@ -166,7 +166,7 @@ const Home = () => {
     // console.log(productList)
 
     const normalColor = "bg-[#01796F] hover:bg-[#004D46]"
-    
+
     // /30 means at 30% opacity
     const activeColor = "!bg-[#004D46] ring-4 ring-[#01796F]/30"
 
@@ -224,10 +224,10 @@ const Home = () => {
                     </select>
                 )}
             </div>
-            <ul>
+            <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {filteredProductList ? (
                     filteredProductList.map((product) => (
-                        <li key={product.id}>
+                        <li key={product.id} className="h-full">
                             <MiniProductCard product={product}/>
                         </li>
                     ))

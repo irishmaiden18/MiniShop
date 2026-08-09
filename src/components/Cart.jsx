@@ -51,7 +51,7 @@ const Cart = () => {
     <>
         <h2>Cart</h2>
         <h3>PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
-        <ul>
+        <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
             {cart ? (
                 cart.map((product) => (
                     <li key={product.id}>
