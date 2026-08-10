@@ -74,10 +74,12 @@ const Navbar = () => {
                 </div>
 
                 {/* cart counter element */}
-                <div className="flex items-center gap-1 py-1">
-                  <Cart2 color="white" size={30} />
-                  <span className="font-bold pl-1 lg:pl-0">{totalItemsInCart}</span>
-                </div>
+                <Link to="/cart">
+                  <div className="flex items-center gap-1 py-1">
+                    <Cart2 color="white" size={30} />
+                    <span className="font-bold pl-1 lg:pl-0">{totalItemsInCart}</span>
+                  </div>
+                </Link>
               </div>
 
               {/* hamburger button */}
