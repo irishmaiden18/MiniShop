@@ -9,7 +9,7 @@ import CheckoutComponent from "./CheckoutComponent"
 
 const Cart = () => {
 
-    const {cart} = useContext(CartContext)
+    const {cart, setCart} = useContext(CartContext)
 
     const {orders, setOrders} = useContext(OrdersContext)
 
@@ -25,17 +25,29 @@ const Cart = () => {
         return total
     }
 
+    const totalQty = (array) => {
+        let qty = 0
+        for (let i = 0; i <array.length; i++) {
+            qty += Number(array[i].quantity)
+        }
+        return qty
+    }
+
     const total = totalPrice(cart)
+    const roundedTotal = total.toFixed(2)
+    const qty = totalQty(cart)
 
     const checkout = () => {
-        alert(`Checked out! Total price: $${total}.00`)
+        alert(`Checked out! Total price: $${roundedTotal}${roundedTotal===0 ? ".00" : ""}`)
 
         console.log(cart)
 
         if (orders.length === 0) {
             setOrders([cart])
+            setCart([])
         } else {
             setOrders([...orders, cart])
+            setCart([])
         }
 
         console.log(orders)
@@ -49,8 +61,8 @@ const Cart = () => {
 
   return (
     <>
-        <h2>Cart</h2>
-        <h3>PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
+        <h2 className="text-center text-4xl py-8">Cart</h2>
+        <h3 className="text-center px-2 pb-8">PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
         <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
             {cart ? (
                 cart.map((product) => (
@@ -62,12 +74,22 @@ const Cart = () => {
                 <h2>No Data</h2>
             )}
         </ul>
-        <h3>Total Price: ${total}.00</h3>
-        <Link to="/"><button>Continue Shopping</button></Link>
-        <button onClick={checkout}>Checkout</button>
-        <PayPalScriptProvider options={initialOptions}>
-            <CheckoutComponent PayPalButtons={PayPalButtons} total={total} />
-        </PayPalScriptProvider>
+        <div className="flex flex-col xl:flex-row justify-between">
+            <div className="flex flex-col justify-center items-center w-full xl:flex-1">
+                <h3 className="text-center py-8 font-bold text-2xl">Total ({qty}): ${roundedTotal}{roundedTotal===0 && ".00"}</h3>
+                <div className="flex justify-center items-center">
+                    <Link to="/"><button className="bg-[#01796F] text-white w-50 text-center rounded-xl pt-2 pb-3 mb-12">Continue Shopping</button></Link>
+                </div>
+            </div>
+            <div className="flex flex-col items-center xl:pt-12"> 
+                <button onClick={checkout} className="bg-[#01796F] text-white w-full md:w-[750px] text-center py-4 mb-4 font-bold text-xl">Checkout</button>
+                <PayPalScriptProvider options={initialOptions}>
+                    <div className="w-full md:w-[750px] flex flex-col items-stretch">
+                        <CheckoutComponent PayPalButtons={PayPalButtons} total={total}/>
+                    </div>
+                </PayPalScriptProvider>
+            </div>
+        </div>
     </>
   )
 }
