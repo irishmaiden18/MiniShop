@@ -62,7 +62,9 @@ const Cart = () => {
   return (
     <>
         <h2 className="text-center text-4xl py-8">Cart</h2>
-        <h3 className="text-center px-2 pb-8">PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
+        <div className="bg-white p-4 mb-4 min-[660px]:rounded-xl w-fit mx-auto">
+            <h3 className="text-red-600 font-bold px-2">PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
+        </div>
         <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
             {cart ? (
                 cart.map((product) => (
