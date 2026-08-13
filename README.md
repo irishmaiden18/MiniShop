@@ -4,7 +4,7 @@ A responsive sample e-commerce web application that displays products from a rem
 
 Link to site: https://minishop-oo89.onrender.com
 
-API: https://dummyjson.com/products
+API: https://dummyjson.com/products, https://dummyjson.com/docs/products
 
 ![desktop website view](https://github.com/irishmaiden18/MiniShop/blob/master/public/minishop_desktop.jpg)
 
