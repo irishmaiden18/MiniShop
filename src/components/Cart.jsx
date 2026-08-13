@@ -65,7 +65,7 @@ const Cart = () => {
         <div className="bg-white p-4 mb-4 min-[660px]:rounded-xl w-fit mx-auto">
             <h3 className="text-red-600 font-bold px-2">PLEASE NOTE! This is NOT a real website, it is an EXAMPLE! You CANNOT really order items from here! Nothing will EVER be shipped to you!</h3>
         </div>
-        <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+        <ul className="w-[75%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
             {cart ? (
                 cart.map((product) => (
                     <li key={product.id}>
@@ -84,7 +84,7 @@ const Cart = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center xl:pt-12"> 
-                <button onClick={checkout} className="bg-[#01796F] text-white w-full md:w-[750px] text-center py-4 mb-4 font-bold text-xl">Checkout</button>
+                <button onClick={checkout} className="bg-[#01796F] text-white w-full md:w-[750px] text-center py-4 mb-4 lg:font-bold text-xl">Checkout</button>
                 <PayPalScriptProvider options={initialOptions}>
                     <div className="w-full md:w-[750px] flex flex-col items-stretch">
                         <CheckoutComponent PayPalButtons={PayPalButtons} total={total}/>

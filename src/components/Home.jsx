@@ -173,58 +173,62 @@ const Home = () => {
     return (
         <>
             {/* <h2>Home</h2> */}
-            <div className="flex justify-center items-center w-full mb-4">
-                <label className="bg-[#01796F] text-white p-3 my-4 inline-block rounded-l-xl">Search</label>
-                <input 
-                    type="text"
-                    value={search}
-                    onChange={(event) => setSearch(event.target.value)}
-                    className="bg-[#FAF0E6] text-black p-3 w-[80%] rounded-r-xl"
-                />
-            </div>
+            <div className="flex flex-col gap-6 gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-[90%] lg:w-[96%] mx-auto m-10">
+                <div className="flex justify-center items-center w-full">
+                    <label className="bg-[#01796F] text-white p-3 inline-block rounded-l-xl">Search</label>
+                    <input 
+                        type="text"
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
+                        className="bg-[#FAF0E6] text-black p-3 w-full rounded-r-xl"
+                    />
+                </div>
+                
+                <div className="grid grid-cols-3 lg:flex lg:justify-around lg:items-center gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-full">
+                    <button onClick={toggleGroceriesDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isGroceriesOpen ? activeColor : normalColor}`}>Groceries</button>
+                    <button onClick={handleKitchenAccessoryButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Kitchen Accessories</button>
+                    <button onClick={handleBeautyButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Beauty</button>
+                    <button onClick={toggleClothingDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isClothingOpen ? activeColor : normalColor}`}>Clothing</button>
+                    <button onClick={handleHomeDecorButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Home Decoration</button>
+                    <button onClick={handleAllButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>All Products</button>
+                </div>
+                {(isGroceriesOpen || isClothingOpen) && (
+                    <div className="flex justify-start items-center w-[50%] bg-[#FAF0E6] text-black mx-auto">
+                        {isGroceriesOpen && (
+                            <select
+                                name="groceries"
+                                value={filterBy}
+                                onChange={(event) => {setFilterBy(event.target.value)}}
+                                className="w-full bg-[#FAF0E6] text-black"
+                                
+                            >
+                                <option value="all-groceries">All</option>
+                                <option value="pet supplies">Pet Supplies</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="meat">Meat</option>
+                                <option value="other-groceries">Other</option>
+                            </select>
+                        )}
             
-            <div className="grid grid-cols-3 lg:flex lg:justify-around lg:items-center gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-[80%] lg:w-[96%] mx-auto">
-                <button onClick={toggleGroceriesDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isGroceriesOpen ? activeColor : normalColor}`}>Groceries</button>
-                <button onClick={handleKitchenAccessoryButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Kitchen Accessories</button>
-                <button onClick={handleBeautyButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Beauty</button>
-                <button onClick={toggleClothingDropdown} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 ${isClothingOpen ? activeColor : normalColor}`}>Clothing</button>
-                <button onClick={handleHomeDecorButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>Home Decoration</button>
-                <button onClick={handleAllButton} className={`bg-[#01796F] text-white w-full md:flex-1 text-center leading-tight h-14 sm:h-11 rounded-xl px-1 hover:bg-[#004D46]`}>All Products</button>
-            </div>
-            <div className="flex justify-start items-center w-[50%] bg-[#FAF0E6] text-black mx-auto mt-4">
-                {isGroceriesOpen && (
-                    <select
-                        name="groceries"
-                        value={filterBy}
-                        onChange={(event) => {setFilterBy(event.target.value)}}
-                        className="w-full bg-[#FAF0E6] text-black"
-                        
-                    >
-                        <option value="all-groceries">All</option>
-                        <option value="pet supplies">Pet Supplies</option>
-                        <option value="fruits">Fruits</option>
-                        <option value="vegetables">Vegetables</option>
-                        <option value="meat">Meat</option>
-                        <option value="other-groceries">Other</option>
-                    </select>
-                )}
-    
-                {isClothingOpen && (
-                    <select
-                        name="clothing"
-                        value={filterBy}
-                        onChange={(event) => {setFilterBy(event.target.value)}}
-                        className="w-full bg-[#FAF0E6] text-black"
-                    >
-                        <option value="all-clothing">All</option>
-                        <option value="mens-shirts">Men's Shirts</option>
-                        <option value="footwear">Footwear</option>
-                        <option value="watches">Watches</option>
-                        <option value="other-clothing">Other</option>
-                    </select>
+                        {isClothingOpen && (
+                            <select
+                                name="clothing"
+                                value={filterBy}
+                                onChange={(event) => {setFilterBy(event.target.value)}}
+                                className="w-full bg-[#FAF0E6] text-black"
+                            >
+                                <option value="all-clothing">All</option>
+                                <option value="mens-shirts">Men's Shirts</option>
+                                <option value="footwear">Footwear</option>
+                                <option value="watches">Watches</option>
+                                <option value="other-clothing">Other</option>
+                            </select>
+                        )}
+                    </div>
                 )}
             </div>
-            <ul className="w-[60%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+            <ul className="w-[75%] md:w-[96%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {filteredProductList ? (
                     filteredProductList.map((product) => (
                         <li key={product.id} className="h-full">

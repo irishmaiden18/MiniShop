@@ -202,14 +202,14 @@ const AddProduct = () => {
                         </div>
                     </div>
                     {/* preview */}
-                    <div className="pb-25 lg:pb-4 lg:col-span-5 w-full lg:mx-auto">
+                    <div className="pb-2 md:pb-10 lg:pb-4 lg:col-span-5 w-full lg:mx-auto">
                         <h3 className="text-center text-2xl py-8 lg:pt-0">Preview</h3>
-                        <div className="bg-[#FAF0E6] w-full flex flex-col items-center h-full rounded-xl overflow-hidden">
+                        <div className="bg-[#FAF0E6] w-full flex flex-col items-center lg:h-full rounded-xl overflow-hidden">
                             <div className="bg-white w-full">
                                 <img src={formData.images.length > 0 ? formData.images[0] : "/blankImage.jpg"} alt={`${formData.title || "Product Title"} pic`} className="bg-white w-full h-auto block"/>
                             </div>
-                            <div className="p-4 flex flex-col flex-1 w-full">
-                                <h2 className="text-center py-4 text-xl flex-1 flex items-center justify-center">{formData.title || "Product Title"}</h2>
+                            <div className="p-4 flex flex-col lg:flex-1 w-full">
+                                <h2 className="text-center py-4 text-xl lg:flex-1 flex items-center justify-center">{formData.title || "Product Title"}</h2>
                                 <div className="flex justify-center pb-4">
                                     <StarRating rating={formData.customerRating || 3.5}/>
                                 </div>
@@ -224,7 +224,7 @@ const AddProduct = () => {
                         </div>
                     </div>
                     {/* add product button */}
-                    <div className="lg:col-span-full flex justify-center items-center pt-8 pb-6">
+                    <div className="lg:col-span-full flex justify-center items-center md:pt-0 pt-8 pb-6">
                         <button className="bg-[#01796F] text-white text-center w-fit rounded-xl py-3 px-8 hover:bg-[#004D46] hover:ring-4 hover:ring-[#01796F]/30">Add Product</button>
                     </div>
                 </div>
