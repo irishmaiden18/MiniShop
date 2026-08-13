@@ -173,7 +173,7 @@ const Home = () => {
     return (
         <>
             {/* <h2>Home</h2> */}
-            <div className="flex flex-col gap-6 gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-[90%] lg:w-[96%] mx-auto m-10">
+            <div className="flex flex-col gap-6 sm:gap-4 md:gap-6 lg:gap-4 xl:gap-8 w-[90%] lg:w-[96%] mx-auto m-10">
                 <div className="flex justify-center items-center w-full">
                     <label className="bg-[#01796F] text-white p-3 inline-block rounded-l-xl">Search</label>
                     <input 
