@@ -127,7 +127,7 @@ function App() {
           decreaseCartQuantity: decreaseCartQuantity
         }}>
 
-          <DuringDevelopment/>
+          {/* <DuringDevelopment/> */}
 
           <div className="bg-[#E4D2BA] min-h-screen flex flex-col">
 
